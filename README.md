@@ -9,7 +9,6 @@
 
 ### Setup environment ###
 * Clone lexx from stash
-* Switch branch to develop
 
 ### Setup IntelliJ ###
 * Create new project in IntelliJ
