@@ -3,8 +3,6 @@
 ### Install requirements on Ubuntu ###
 * sudo apt-get update
 * sudo apt-get install openjdk-18-jdk
-* sudo apt-get install maven
-* setup JAVA_HOME for your environment
 
 ### Install requirements on Mac OSX ###
 * Download and install JDK: http://www.oracle.com/technetwork/java/javase/downloads/index.html
