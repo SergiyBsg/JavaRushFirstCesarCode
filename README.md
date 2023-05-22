@@ -12,7 +12,6 @@
 
 ### Setup IntelliJ ###
 * Create new project in IntelliJ
-* Choose java module
 * Click "new" in SDK and choose "JDK"
 * Browse to /System/Library/Java/JavaVirtualMachines and choose the 18 .jdk
 * Set the project location to the Lexx directory
