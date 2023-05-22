@@ -8,7 +8,6 @@
 * Download and install JDK: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 ### Setup environment ###
-* Clone lexx from stash
 
 ### Setup IntelliJ ###
 * Browse to /System/Library/Java/JavaVirtualMachines and choose the 18 .jdk
