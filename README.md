@@ -11,7 +11,6 @@
 * Clone lexx from stash
 
 ### Setup IntelliJ ###
-* Create new project in IntelliJ
 * Browse to /System/Library/Java/JavaVirtualMachines and choose the 18 .jdk
 * Set the project location to the Lexx directory
 * Check that "maven integration" is installed under plugins in IntelliJ
