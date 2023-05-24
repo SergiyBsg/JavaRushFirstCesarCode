@@ -1,8 +1,4 @@
-#Ignore IntelliJ project files
-######################
-.idea/**/*
-.idea/*
-.idea
+### IntelliJ IDEA ###
+out/
+.idea/
 *.iml
-out
-JavaRushFirstCesarCode.xml
