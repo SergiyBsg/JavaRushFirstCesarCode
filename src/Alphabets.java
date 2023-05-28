@@ -7,13 +7,11 @@ public enum Alphabets {
     ALPHABET_UA('А','а','Б','б','В','в','Г','г','Ґ','ґ','Д','д','Е','е','Є','є','Ж','ж','З','з','И','и','І','і','Ї','ї','Й','й','К','к','Л','л','М','м','Н','н','О','о','П','п','Р','р','С','с','Т','т','У','у','Ф','ф','Х','х','Ц','ц','Ч','ч','Ш','ш','Щ','щ','Ь','ь','Ю','ю','Я','я');
 
     Alphabets(char ... chars){
-        List<Character> characterList = new ArrayList<>();
+        this.chars = new ArrayList<>();
 
         for (char symbol : chars) {
-            characterList.add(symbol);
+            this.chars.add(symbol);
         }
-
-        this.chars = characterList;
     }
 
     private final List<Character> chars;
