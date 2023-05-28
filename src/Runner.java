@@ -1,20 +1,8 @@
-import java.util.List;
 import java.util.Objects;
 
 public class Runner {
-    private String[] args;
 
-    public Runner(String[] args) {
-        this.args = args;
-    }
-
-    public void run() {
-        int counter = 0;
-        while (!List.of(2,3).contains(args.length) && counter < 3) {
-            args = new CliHelper().typeParameters();
-            counter++;
-        }
-
+    public void run(String[] args) {
         if (2 <= args.length && args.length <= 3) {
             Coder coder = new Coder();
             Actions action = CliHelper.getAction(args[0]);
@@ -29,7 +17,7 @@ public class Runner {
                     case DECRYPT -> fileService.writeFile(fileService.getFileName()+"[DECRYPTED]"+fileService.getFileExtention(), coder.decrypt(readText));
                     default -> System.out.println("Wrong action is defined");
                 }
-            } else if (args.length == 2) {
+            } else {
                 if (action == Actions.BRUTEFORCE) {
                     fileService.writeFile(fileService.getFileName()+"[DECRYPTED]"+fileService.getFileExtention(), coder.bruteForce(readText));
                 } else {

@@ -8,9 +8,12 @@ public class CliHelper {
 
         System.out.println("Choose an action [Ee]ncrypt, [Dd]ecrypt, [Bb]ruteforce");
         Actions action;
+        boolean result;
         do {
             action = getAction(input.nextLine());
-        } while (!List.of(Actions.values()).contains(action));
+            result = List.of(Actions.values()).contains(action);
+            if(!result) System.out.println("Choose an action [Ee]ncrypt, [Dd]ecrypt, [Bb]ruteforce");
+        } while (!result);
 
         assert action != null;
         int argsSize = (action == Actions.ENCRYPT || action == Actions.DECRYPT) ? 3 : 2;
@@ -18,7 +21,7 @@ public class CliHelper {
         String[] args = new String[argsSize];
         args[0] = action.name();
 
-        System.out.println("Put an absolute path to a file: ");
+        System.out.println("Put a path to a txt file: ");
         args[1] = input.nextLine();
 
         if (argsSize == 3) {

@@ -4,14 +4,6 @@ import java.util.List;
 public class Coder {
     private int key;
 
-
-    public Coder() {
-    }
-
-    public Coder(int key) {
-        this.key = key;
-    }
-
     public void setKey(int key) {
         this.key = key;
     }
@@ -68,6 +60,22 @@ public class Coder {
     }
 
     public String bruteForce(String text) {
+        int maxKey = Math.max(Alphabets.ALPHABET_UA.getList().size(), Alphabets.ALPHABET_EN.getList().size());
+        int key = 1;
+        String expectedText = "";
+
+        do {
+            expectedText = decrypt(key, text);
+            for (int i = 0; i < expectedText.length(); i++) {
+                if (expectedText.charAt(i) == ',' && expectedText.charAt(i+1) == ' ') {
+                    System.out.println("key is - " + key);
+                    return expectedText;
+                }
+            }
+            key++;
+        } while (key < maxKey);
+
+        System.out.println("key was not found");
         return "";
     }
 
