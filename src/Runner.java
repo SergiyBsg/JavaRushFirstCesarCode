@@ -25,13 +25,13 @@ public class Runner {
             if (args.length == 3) {
                 coder.setKey(Integer.parseInt(args[2]));
                 switch (Objects.requireNonNull(action)) {
-                    case ENCRYPT -> fileService.writeFile(coder.encrypt(readText));
-                    case DECRYPT -> fileService.writeFile(coder.decrypt(readText));
+                    case ENCRYPT -> fileService.writeFile(fileService.getFileName()+"[ENCRYPTED]"+fileService.getFileExtention(), coder.encrypt(readText));
+                    case DECRYPT -> fileService.writeFile(fileService.getFileName()+"[DECRYPTED]"+fileService.getFileExtention(), coder.decrypt(readText));
                     default -> System.out.println("Wrong action is defined");
                 }
             } else if (args.length == 2) {
                 if (action == Actions.BRUTEFORCE) {
-                    fileService.writeFile(coder.bruteForce(readText));
+                    fileService.writeFile(fileService.getFileName()+"[DECRYPTED]"+fileService.getFileExtention(), coder.bruteForce(readText));
                 } else {
                     System.out.println("Wrong action is defined");
                 }

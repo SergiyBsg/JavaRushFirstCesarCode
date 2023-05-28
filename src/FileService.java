@@ -1,6 +1,6 @@
 import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 
 public class FileService {
 
@@ -39,6 +39,21 @@ public class FileService {
         }
     }
 
-    public static void writeFile(String filePath, String text) {
+    public void writeFile(String filePath, String text) {
+        try (OutputStream outputStream = new FileOutputStream(filePath)) {
+            outputStream.write(text.getBytes(this.charset));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getFileName(){
+        String fileName = Paths.get(filePath).getFileName().toString();
+        return fileName.contains(".") ? fileName.substring(0, fileName.lastIndexOf(".")) : fileName;
+    }
+
+    public String getFileExtention(){
+        String fileName = Paths.get(filePath).getFileName().toString();
+        return fileName.contains(".") ? fileName.substring(fileName.lastIndexOf(".")) : "";
     }
 }
