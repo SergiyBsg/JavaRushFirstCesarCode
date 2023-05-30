@@ -14,14 +14,17 @@ public class Coder {
 
         for (int i = 0; i < lineArray.length; i++) {
             char symbol = lineArray[i];
-            List<Character> charactersList = getList(symbol);
+            String symbolString = String.valueOf(symbol);
+            String alphabet = getAlphabet(symbolString);
 
-            if (!charactersList.isEmpty()) {
-                int shift = this.key % charactersList.size();
-                int newIndex = charactersList.indexOf(symbol) + shift;
-                int diff = newIndex - charactersList.size();
+            if (!alphabet.equals(symbolString)) {
+                int shift = this.key % alphabet.length();
+                int newIndex = alphabet.indexOf(symbol) + shift;
+                int diff = newIndex - alphabet.length();
                 if (diff >= 0) newIndex = diff;
-                newLine[i] = charactersList.get(newIndex);
+                newLine[i] = alphabet.charAt(newIndex);
+            } else {
+                newLine[i] = symbol;
             }
         }
 
@@ -42,13 +45,16 @@ public class Coder {
 
         for (int i = 0; i < lineArray.length; i++) {
             char symbol = lineArray[i];
-            List<Character> charactersList = getList(symbol);
+            String symbolString = String.valueOf(symbol);
+            String alphabet = getAlphabet(symbolString);
 
-            if (!charactersList.isEmpty()) {
-                int shift = key % charactersList.size();
-                int newIndex = charactersList.indexOf(symbol) - shift;
-                if (newIndex < 0) newIndex += charactersList.size();
-                newLine[i] = charactersList.get(newIndex);
+            if (!alphabet.equals(symbolString)) {
+                int shift = key % alphabet.length();
+                int newIndex = alphabet.indexOf(symbol) - shift;
+                if (newIndex < 0) newIndex += alphabet.length();
+                newLine[i] = alphabet.charAt(newIndex);
+            } else {
+                newLine[i] = symbol;
             }
         }
 
@@ -60,15 +66,15 @@ public class Coder {
     }
 
     public String bruteForce(String text) {
-        int maxKey = Math.max(Alphabets.ALPHABET_UA.getList().size(), Alphabets.ALPHABET_EN.getList().size());
+        int maxKey = Math.max(Alphabets.ALPHABET_UA.getAlphabet().length(), Alphabets.ALPHABET_EN.getAlphabet().length());
         int key = 1;
         String expectedText = "";
 
         do {
             expectedText = decrypt(key, text);
             for (int i = 0; i < expectedText.length(); i++) {
-                if (expectedText.charAt(i) == ',' && expectedText.charAt(i+1) == ' ') {
-                    System.out.println("key is - " + key);
+                if (expectedText.charAt(i) == ',' && i < expectedText.length()-1 && expectedText.charAt(i+1) == ' ') {
+                    System.out.println("key is - "+key);
                     return expectedText;
                 }
             }
@@ -79,14 +85,13 @@ public class Coder {
         return "";
     }
 
-    private List<Character> getList(char symbol) {
-        List<Character> chars = new ArrayList<>();
-        if (Alphabets.ALPHABET_EN.getList().contains(symbol)) {
-            chars.addAll(Alphabets.ALPHABET_EN.getList());
-        } else if (Alphabets.ALPHABET_UA.getList().contains(symbol)) {
-            chars.addAll(Alphabets.ALPHABET_UA.getList());
+    private String getAlphabet(String symbol) {
+        if (Alphabets.ALPHABET_EN.getAlphabet().contains(symbol)) {
+            return Alphabets.ALPHABET_EN.getAlphabet();
+        } else if (Alphabets.ALPHABET_UA.getAlphabet().contains(symbol)) {
+            return Alphabets.ALPHABET_UA.getAlphabet();
         }
 
-        return chars;
+        return symbol;
     }
 }

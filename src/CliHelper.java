@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class CliHelper {
         boolean result;
         do {
             action = getAction(input.nextLine());
-            result = List.of(Actions.values()).contains(action);
+            result = Arrays.asList(Actions.values()).contains(action);
             if(!result) System.out.println("Choose an action [Ee]ncrypt, [Dd]ecrypt, [Bb]ruteforce");
         } while (!result);
 
