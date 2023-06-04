@@ -5,24 +5,13 @@ import java.nio.file.Paths;
 
 public class FileService {
 
-    private final String filePath;
-    private final Charset charset;
+    private String filePath = "";
+    private final Charset charset = Charset.defaultCharset();
 
-    public FileService(String filePath) {
-        this.filePath = filePath;
-        this.charset = Charset.defaultCharset();
-    }
-
-    public FileService(String filePath, Charset charset) {
-        this.filePath = filePath;
-        this.charset = charset;
-    }
-
-    public String readFile() {
-        return readFile(this.filePath);
-    }
+    public FileService() {}
 
     public String readFile(String filePath) {
+        this.filePath = filePath;
         String text = "";
         try (InputStream inputStream = new FileInputStream(filePath)) {
             text = new String(inputStream.readAllBytes(), String.valueOf(this.charset));
@@ -31,15 +20,6 @@ public class FileService {
             e.printStackTrace();
         }
         return text;
-    }
-
-    public void writeFile(String text) {
-        try (OutputStream outputStream = new FileOutputStream(filePath)) {
-            outputStream.write(text.getBytes(this.charset));
-        } catch (IOException e) {
-            System.out.println("There is no such file '" + filePath + "'");
-            e.printStackTrace();
-        }
     }
 
     public void writeFile(String filePath, String text) {
