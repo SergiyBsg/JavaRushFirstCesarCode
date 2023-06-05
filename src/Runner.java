@@ -7,8 +7,8 @@ public class Runner {
             Coder coder = new Coder();
             Actions action = CliHelper.getAction(args[0]);
             String filePath = args[1];
-            FileService fileService = new FileService();
-            String readText = fileService.readFile(filePath);
+            FileService fileService = new FileService(filePath);
+            String readText = fileService.readFile();
 
             if (args.length == 3) {
                 coder.setKey(Integer.parseInt(args[2]));

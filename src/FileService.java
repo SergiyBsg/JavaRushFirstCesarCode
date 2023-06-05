@@ -1,22 +1,29 @@
 import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 
 public class FileService {
 
-    private String filePath = "";
-    private final Charset charset = Charset.defaultCharset();
+    private final String filePath;
+    private final Charset charset;
 
-    public FileService() {}
+    public FileService(String filePath) {
+        this.filePath = filePath;
+        this.charset = Charset.defaultCharset();
+    }
+
+    public String readFile() {
+        return readFile(this.filePath);
+    }
 
     public String readFile(String filePath) {
-        this.filePath = filePath;
         String text = "";
         try (InputStream inputStream = new FileInputStream(filePath)) {
             text = new String(inputStream.readAllBytes(), String.valueOf(this.charset));
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("There is no such file '" + filePath + "'");
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return text;
@@ -25,8 +32,10 @@ public class FileService {
     public void writeFile(String filePath, String text) {
         try (OutputStream outputStream = new FileOutputStream(filePath)) {
             outputStream.write(text.getBytes(this.charset));
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("There is no such file '" + filePath + "'");
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
