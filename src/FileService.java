@@ -1,5 +1,7 @@
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FileService {
@@ -18,8 +20,8 @@ public class FileService {
 
     public String readFile(String filePath) {
         String text = "";
-        try (InputStream inputStream = new FileInputStream(filePath)) {
-            text = new String(inputStream.readAllBytes(), String.valueOf(this.charset));
+        try (InputStream input = Files.newInputStream(Path.of(filePath))) {
+            text = new String(input.readAllBytes(), String.valueOf(this.charset));
         } catch (FileNotFoundException e) {
             System.out.println("There is no such file '" + filePath + "'");
             e.printStackTrace();
@@ -30,7 +32,7 @@ public class FileService {
     }
 
     public void writeFile(String filePath, String text) {
-        try (OutputStream outputStream = new FileOutputStream(filePath)) {
+        try (OutputStream outputStream = Files.newOutputStream(Path.of(filePath))) {
             outputStream.write(text.getBytes(this.charset));
         } catch (FileNotFoundException e) {
             System.out.println("There is no such file '" + filePath + "'");
